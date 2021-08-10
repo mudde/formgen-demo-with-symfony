@@ -9,6 +9,7 @@
         "php": ">=8.0.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "mudde/formgen4symfony": "dev-main",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.1",
@@ -38,6 +39,12 @@
             "App\\Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url":  "git@github.com:mudde/formgen4symfony.git"
+        }
+    ],
     "replace": {
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
