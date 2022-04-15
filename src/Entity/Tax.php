@@ -2,19 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\TaxRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Mudde\Formgen4Symfony\Annotation\FormField;
 use Mudde\Formgen4Symfony\Annotation\Formgen;
 use Mudde\Formgen4Symfony\Annotation\FormIgnore;
-
+use App\Repository\TaxRepository;
 
 /**
- * @ORM\Entity(repositoryClass=TaxRepository::class)
+ * @ORM\Entity(repositoryClass=TaxRepository::class)]
  */
-#[Formgen('tax', [])]
+#[Formgen('tax',['data'=> ['_type'=>'Api', 'url'=>'api/taxes'  ], 'languages'=>['nl'], 'buttons'=>[["_type"=> "Submit","label"=> "Opslaan"]], 'builders'=>[["_type"=> "TabBuilder"]]])]
+#[ApiResource('Tax')]
 class Tax
 {
     /**
@@ -22,21 +22,21 @@ class Tax
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[FormField('id', 'id', [], ['ReadOnly' => true])]
-    private $id;
+    #[FormField('id', 'id', [], ['readonly' => true])]
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     #[FormField('name', 'name', [], [])]
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", precision=2, scale=2)
      */
-    #[FormField('percentage', 'Tax percentage', [], [])]
-    private $percentage;
-
+    #[FormField('percentage', 'Tax percentage', [], ['_type' => 'Number'])]
+    private float $percentage;
+    
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="tax")
      */
@@ -77,10 +77,7 @@ class Tax
         return $this;
     }
 
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
+    public function getProducts()
     {
         return $this->products;
     }

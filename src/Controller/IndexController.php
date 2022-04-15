@@ -12,20 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/api/form/product', name: 'index')]
+
+    #[Route('/', name: 'index')]
     public function formProduct(): Response
     {
-        return $this->json(FormgenHelper::toJson(Product::class));
-    }
-    #[Route('/api/form/tax', name: 'index_test')]
-    public function formTax(): Response
-    {
-        return $this->json(FormgenHelper::toJson(Tax::class));
-    }
-    #[Route('/api/data/tax', name: 'index_test')]
-    public function dataTax(TaxRepository $repo): Response
-    {
-        return $this->json($repo->findAll());
+        return $this->render('index.html.twig');
     }
 
 }

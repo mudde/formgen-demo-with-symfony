@@ -1,0 +1,127 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Formgen Symfony demo!{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="./build/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./build/semantic-ui-flag/flag.min.css">
+  <link rel="stylesheet" href="./build/select2/css/select2.min.css">
+{% endblock %}
+
+{% block javascripts %}
+  <script src="./build/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./build/jquery/jquery.min.js"></script>
+  <script src="./build/jquery.validation/jquery.validate.min.js"></script>
+  <script src="./build/select2/js/select2.min.js"></script>
+  <script src="./build/mudde/_/_/_/_/_/formgen/dist/formgen.js"></script>
+{% endblock %}
+
+{% block body %}
+  <style>
+    body {
+      overflow-y: scroll;
+    }
+
+    input[type=radio] {
+      margin-right: 10px;
+    }
+
+    .display-inline > div {
+      display: inline-block;
+    }
+
+    div > label.myLabel {
+      border-bottom: 2px solid #f1f1f1;
+      display: block;
+      padding-left: 10px;
+      margin-bottom: 5px;
+      font-weight: bolder;
+      text-transform: uppercase;
+    }
+
+    label > svg {
+      margin-left: 5px;
+    }
+
+    label.error {
+      width: 100%;
+      margin-top: 4px;
+      padding-right: 10px;
+      color: #a1000f;
+      font-size: 13px;
+      text-align: right;
+      font-weight: 100;
+      text-decoration: dotted underline #ff0000;
+    }
+
+    .select2-selection--single,
+    .select2-selection__arrow {
+      height: 38px !important;
+    }
+    .select2-selection--single {
+      line-height: 38px !important;
+    }
+    .select2-dropdown {
+      color: #212529 !important;
+      background-color: #fff !important;
+      border-color: #86b7fe !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%) !important;
+      border-radius: 0.25rem !important;
+      border-top: 0 !important;
+    }
+    .btn-self {
+      margin-left: 10px;
+      max-width: 38px;
+      max-height: 38px;
+    }
+    .ck-focus,
+    span.select2-container--focus {
+      color: #212529 !important;
+      background-color: #fff !important;
+      border-color: #86b7fe !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%) !important;
+      border-radius: 0.25rem !important;
+    }
+
+    .ck-editor:focus-within {
+      color: #212529 !important;
+      background-color: #fff !important;
+      border-color: #86b7fe !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%) !important;
+      border-radius: 0.25rem !important;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+      border: 1px solid #86b7fe !important;
+      border-radius: 0.25rem;
+    }
+  </style>
+
+  <div class="container">
+    <button onclick="initForm('./api/taxes/form')">Tax</button>
+    <button onclick="initForm('./api/products/form')">Product</button>
+    <div id="main"></div>
+  </div>
+
+  <script>
+    var formgen;
+
+    var initForm = (uri) => {
+      $.ajax({url: uri}).then((config) => {
+
+        formgen = new MuddeFormgen.Form(config)
+        
+        formgen.render().then((form) => {
+          $('#main').empty().append(form.root)
+        })
+      })
+    }
+
+    jQuery(() => {
+      initForm('./api/products/form')
+    })
+  </script>
+{% endblock %}

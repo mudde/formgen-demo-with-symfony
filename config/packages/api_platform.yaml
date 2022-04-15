@@ -1,0 +1,11 @@
+api_platform:
+    enable_swagger_ui: false
+    enable_re_doc: false
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    patch_formats:
+        json: ['application/json']
+    formats:
+        json: ['application/json']
+    swagger:
+        versions: [3]
