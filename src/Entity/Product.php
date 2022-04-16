@@ -11,7 +11,7 @@ use Mudde\Formgen4Symfony\Annotation\Formgen;
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-#[Formgen('product',['data'=> ['_type'=>'Api', 'url'=>'api/products'  ], 'languages'=>['nl'], 'buttons'=>[["_type"=> "Submit","label"=> "Opslaan"]], 'builders'=>[["_type"=> "TabBuilder"]]])]
+#[Formgen('product', ['data' => ['_type' => 'Api', 'url' => 'api/products'], 'languages' => ['nl'], 'buttons' => [["_type" => "Submit", "label" => "Opslaan"]], 'builders' => [["_type" => "TabBuilder"]]])]
 #[ApiResource('Product')]
 class Product
 {
@@ -26,16 +26,16 @@ class Product
     /**
      * @ORM\Column(type="string")
      */
-    #[FormField('name', 'name', [], ['unique'=>true])]
+    #[FormField('name', 'name', [], ['unique' => true])]
     private string $name = '';
 
     /**
      * @ORM\ManyToOne(targetEntity=Tax::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
-    #[FormField('tax', 'tax', [], ['_type'=>'Select2Relation','inputData' => ['_type'=>'api', 'url'=>'api/taxes' ]])]
+    #[FormField('tax', 'tax', [], ['_type' => 'Select2Relation', 'inputData' => ['_type' => 'api', 'url' => 'api/taxes']])]
     private ?Tax $tax;
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,7 +55,7 @@ class Product
 
     public function getTax(): ?Tax
     {
-        
+
         return $this->tax;
     }
 
